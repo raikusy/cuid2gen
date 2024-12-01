@@ -41,6 +41,17 @@
           pkgs = import nixpkgs {inherit overlays system;};
         });
   in {
+    nix = {
+      settings = {
+        experimental-features = "nix-command flakes ca-derivations";
+        extra-experimental-features = [
+          "flakes"
+          "nix-command"
+          "recursive-nix"
+          "ca-derivations"
+        ];
+      };
+    };
     # Schemas tell Nix about the structure of your flake's outputs
     schemas = flake-schemas.schemas;
 

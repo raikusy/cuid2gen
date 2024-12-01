@@ -33,8 +33,9 @@ fn test_json_format() {
     cmd.arg("--format").arg("json");
     cmd.assert()
         .success()
-        .stdout(predicate::str::is_match(r#"\{"ids":\["[a-z0-9]+"\]\}\n$"#).unwrap());
+        .stdout(predicate::str::is_match(r#"^\{"ids":\["[a-z0-9]+"\]\}\n$"#).unwrap());
 }
+
 
 #[test]
 fn test_csv_format() {

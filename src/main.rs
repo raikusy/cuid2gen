@@ -54,7 +54,8 @@ fn output_ids(ids: Vec<String>, format: &str, quiet: bool) -> Result<()> {
         }
         "json" => {
             let output = Output { ids };
-            serde_json::to_writer_pretty(&mut handle, &output).context("Failed to serialize to JSON")?;
+            serde_json::to_writer(&mut handle, &output)
+                .context("Failed to serialize to JSON")?;
             writeln!(handle).context("Failed to write newline")?;
         }
         _ => {
@@ -72,7 +73,7 @@ fn output_ids(ids: Vec<String>, format: &str, quiet: bool) -> Result<()> {
 
 fn main() -> Result<()> {
     let args = Args::parse();
-    
+
     if let Some(_) = args.length {
         eprintln!("Warning: Custom length is not supported in the current version of cuid2");
     }

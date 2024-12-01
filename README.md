@@ -22,7 +22,7 @@ A fast and secure command-line tool for generating [CUID2](https://github.com/pa
 cargo install cuid2gen
 ```
 
-### Using Homebrew
+### Using Homebrew‰
 
 ```bash
 brew install cuid2gen
