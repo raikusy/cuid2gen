@@ -1,0 +1,33 @@
+[package]
+name = "cuid2gen"
+version = "0.1.0"
+edition = "2021"
+authors = ["Your Name <your.email@example.com>"]
+description = "A command-line tool for generating CUID2 identifiers"
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/yourusername/cuid2gen"
+repository = "https://github.com/yourusername/cuid2gen"
+keywords = ["cuid", "uuid", "cli", "id", "generator"]
+categories = ["command-line-utilities", "development-tools"]
+
+[dependencies]
+cuid2 = "0.1.2"
+clap = { version = "4.4.11", features = ["derive"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+rand = "0.8"
+thiserror = "1.0"
+anyhow = "1.0"
+
+[dev-dependencies]
+assert_cmd = "2.0"
+predicates = "3.0"
+tempfile = "3.8"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = 'abort'
+strip = true
