@@ -86,7 +86,7 @@ fn main() -> Result<()> {
         return Err(anyhow!("Count exceeds maximum allowed value"));
     }
 
-    if let Some(_) = args.length {
+    if args.length.is_some() {
         eprintln!("Warning: Custom length is not supported in the current version of cuid2");
     }
 
