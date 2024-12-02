@@ -57,17 +57,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1733020719,
-        "narHash": "sha256-Chv9+3zrf1DhdB9JyskjoV0vJbCQEgkVqrU3p4RPLv8=",
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "rev": "8e18f10703112e6c33e1c0d8b93e8305f6f0a75c",
-        "type": "github"
+        "lastModified": 1733106880,
+        "narHash": "sha256-aJmAIjZfWfPSWSExwrYBLRgXVvgF5LP1vaeUGOOIQ98=",
+        "rev": "e66c0d43abf5bdefb664c3583ca8994983c332ae",
+        "revCount": 1612,
+        "type": "tarball",
+        "url": "https://api.flakehub.com/f/pinned/oxalica/rust-overlay/0.1.1612%2Brev-e66c0d43abf5bdefb664c3583ca8994983c332ae/0193853a-6cc6-7a3f-9931-86ac742bc619/source.tar.gz"
       },
       "original": {
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "type": "github"
+        "type": "tarball",
+        "url": "https://flakehub.com/f/oxalica/rust-overlay/0.1.1612.tar.gz"
       }
     }
   },

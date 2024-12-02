@@ -12,7 +12,7 @@
     nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*";
 
     rust-overlay = {
-      url = "github:oxalica/rust-overlay";
+      url = "https://flakehub.com/f/oxalica/rust-overlay/0.1.1612.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

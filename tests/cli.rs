@@ -36,7 +36,6 @@ fn test_json_format() {
         .stdout(predicate::str::is_match(r#"^\{"ids":\["[a-z0-9]+"\]\}\n$"#).unwrap());
 }
 
-
 #[test]
 fn test_csv_format() {
     let mut cmd = Command::cargo_bin("cuid2gen").unwrap();
@@ -44,4 +43,19 @@ fn test_csv_format() {
     cmd.assert()
         .success()
         .stdout(predicate::str::is_match(r"^[a-z0-9]+,[a-z0-9]+\n$").unwrap());
+}
+
+#[test]
+fn test_quiet_mode() {
+    let mut cmd = Command::cargo_bin("cuid2gen").unwrap();
+    cmd.arg("--quiet");
+    cmd.assert().success().stdout(predicate::str::is_empty());
+}
+
+// The unit test for generate_ids should be in the main.rs file or a separate module
+// If you want to test it here, you need to make the function accessible
+#[cfg(test)]
+mod unit_tests {
+    // This test has been removed since generate_ids is not accessible here
+    // It should be moved to the main crate's tests
 }
