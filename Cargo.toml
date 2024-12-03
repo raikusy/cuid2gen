@@ -2,6 +2,7 @@
 name = "cuid2gen"
 version = "0.1.0"
 edition = "2021"
+resolver = "2"
 authors = ["@raikusy <ping@raikusy.dev>"]
 description = "A command-line tool for generating CUID2 identifiers"
 license = "MIT"
@@ -10,6 +11,14 @@ homepage = "https://github.com/raikusy/cuid2gen"
 repository = "https://github.com/raikusy/cuid2gen"
 keywords = ["cuid", "uuid", "cli", "id", "generator"]
 categories = ["command-line-utilities", "development-tools"]
+
+[[bin]]
+name = "cuid2gen"
+path = "src/main.rs"
+
+[[test]]
+name = "integration"
+path = "tests/cli.rs"
 
 [dependencies]
 cuid2 = "0.1.2"

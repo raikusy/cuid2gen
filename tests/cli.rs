@@ -51,11 +51,3 @@ fn test_quiet_mode() {
     cmd.arg("--quiet");
     cmd.assert().success().stdout(predicate::str::is_empty());
 }
-
-// The unit test for generate_ids should be in the main.rs file or a separate module
-// If you want to test it here, you need to make the function accessible
-#[cfg(test)]
-mod unit_tests {
-    // This test has been removed since generate_ids is not accessible here
-    // It should be moved to the main crate's tests
-}
