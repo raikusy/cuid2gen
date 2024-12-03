@@ -9,6 +9,7 @@ license = "MIT"
 readme = "README.md"
 homepage = "https://github.com/raikusy/cuid2gen"
 repository = "https://github.com/raikusy/cuid2gen"
+documentation = "https://docs.rs/cuid2gen"
 keywords = ["cuid", "uuid", "cli", "id", "generator"]
 categories = ["command-line-utilities", "development-tools"]
 
