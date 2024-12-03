@@ -44,10 +44,30 @@ struct Output {
     ids: Vec<String>,
 }
 
+/// Generates `count` number of CUID2 identifiers.
+///
+/// # Arguments
+///
+/// * `count` - The number of IDs to generate
+///
+/// # Returns
+///
+/// A vector containing the generated CUID2 identifiers
 fn generate_ids(count: u32) -> Vec<String> {
     (0..count).map(|_| create_id()).collect()
 }
 
+/// Output CUID2 identifiers in the specified format.
+///
+/// # Arguments
+///
+/// * `ids` - A vector of CUID2 identifiers to output
+/// * `format` - The output format (Line, CSV, or JSON)
+/// * `quiet` - Whether to suppress output
+///
+/// # Returns
+///
+/// Result indicating success or an error if writing fails
 fn output_ids(ids: Vec<String>, format: &OutputFormat, quiet: bool) -> Result<()> {
     let stdout = io::stdout();
     let mut handle = stdout.lock();
@@ -79,6 +99,42 @@ fn output_ids(ids: Vec<String>, format: &OutputFormat, quiet: bool) -> Result<()
     Ok(())
 }
 
+/// A command-line tool for generating CUID2 identifiers
+///
+/// # Usage
+///
+/// ```text
+/// cuid2 [OPTIONS]
+///
+/// Options:
+///   -c, --count <COUNT>    Number of IDs to generate [default: 1]
+///   -l, --length <LENGTH>  Length of each ID (not currently supported)
+///   -f, --format <FORMAT>  Output format: line (default), csv, json [default: line]
+///   -q, --quiet           Only output errors
+///   -h, --help           Print help
+///   -V, --version        Print version
+/// ```
+///
+/// # Examples
+///
+/// Generate a single CUID2:
+/// ```text
+/// $ cuid2
+/// ckxyv07pg000001l53uw5cs8n
+/// ```
+///
+/// Generate 3 CUIDs in CSV format:
+/// ```text
+/// $ cuid2 -c 3 -f csv
+/// ckxyv07pg000001l53uw5cs8n,ckxyv07pg000002l53uw5cs8n,ckxyv07pg000003l53uw5cs8n
+/// ```
+///
+/// Generate 2 CUIDs in JSON format:
+/// ```text
+/// $ cuid2 -c 2 -f json
+/// {"ids":["ckxyv07pg000001l53uw5cs8n","ckxyv07pg000002l53uw5cs8n"]}
+/// ```
+///
 fn main() -> Result<()> {
     let args = Args::parse();
 

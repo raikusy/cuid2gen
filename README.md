@@ -99,7 +99,7 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/cuid2gen.git
+git clone https://github.com/raikusy/cuid2gen.git
 cd cuid2gen
 
 # Build
