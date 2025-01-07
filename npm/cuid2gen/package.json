@@ -1,0 +1,44 @@
+{
+  "name": "cuid2gen",
+  "version": "0.1.3",
+  "description": "A command-line tool for generating CUID2 identifiers",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raikusy/cuid2gen.git"
+  },
+  "keywords": [
+    "cuid",
+    "uuid",
+    "cli",
+    "id",
+    "generator"
+  ],
+  "author": "@raikusy <ping@raikusy.dev>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/raikusy/cuid2gen/issues"
+  },
+  "homepage": "https://github.com/raikusy/cuid2gen#readme",
+  "bin": {
+    "cuid2gen": "lib/index.js"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.16",
+    "typescript": "^5.3.3"
+  },
+  "optionalDependencies": {
+    "cuid2gen-linux-x64-glibc": "0.1.3",
+    "cuid2gen-linux-arm64-glibc": "0.1.3",
+    "cuid2gen-darwin-x64": "0.1.3",
+    "cuid2gen-darwin-arm64": "0.1.3",
+    "cuid2gen-win32-x64-msvc": "0.1.3",
+    "cuid2gen-win32-arm64-msvc": "0.1.3"
+  }
+}
