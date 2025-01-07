@@ -25,12 +25,7 @@
     "typescript-eslint": "^8.19.1"
   },
   "optionalDependencies": {
-    "cuid2gen-linux-x64": "0.1.0",
-    "cuid2gen-linux-arm64": "0.1.0",
-    "cuid2gen-darwin-x64": "0.1.0",
-    "cuid2gen-darwin-arm64": "0.1.0",
-    "cuid2gen-windows-x64": "0.1.0",
-    "cuid2gen-windows-arm64": "0.1.0"
+    "cuid2gen-darwin-arm64": "0.1.4"
   },
   "packageManager": "pnpm@9.14.2"
 }
