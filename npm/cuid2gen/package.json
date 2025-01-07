@@ -1,44 +1,36 @@
 {
   "name": "cuid2gen",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "A command-line tool for generating CUID2 identifiers",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/raikusy/cuid2gen.git"
-  },
-  "keywords": [
-    "cuid",
-    "uuid",
-    "cli",
-    "id",
-    "generator"
-  ],
-  "author": "@raikusy <ping@raikusy.dev>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/raikusy/cuid2gen/issues"
-  },
-  "homepage": "https://github.com/raikusy/cuid2gen#readme",
-  "bin": {
-    "cuid2gen": "lib/index.js"
-  },
-  "files": [
-    "lib"
-  ],
+  "bin": "lib/index.js",
   "scripts": {
-    "build": "tsc",
-    "prepublishOnly": "npm run build"
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint ./src",
+    "lint:fix": "eslint ./src --fix",
+    "build": "tsc --outDir lib",
+    "dev": "tsx src/index.ts",
+    "start": "tsx lib/index.js"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
-    "@types/node": "^20.11.16",
-    "typescript": "^5.3.3"
+    "@eslint/js": "^9.17.0",
+    "@types/node": "^22.10.5",
+    "@typescript-eslint/eslint-plugin": "^8.19.1",
+    "@typescript-eslint/parser": "^8.19.1",
+    "eslint": "^9.17.0",
+    "globals": "^15.14.0",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.19.1"
   },
   "optionalDependencies": {
-    "cuid2gen-linux-x64-glibc": "0.1.3",
-    "cuid2gen-linux-arm64-glibc": "0.1.3",
-    "cuid2gen-darwin-x64": "0.1.3",
-    "cuid2gen-darwin-arm64": "0.1.3",
-    "cuid2gen-win32-x64-msvc": "0.1.3",
-    "cuid2gen-win32-arm64-msvc": "0.1.3"
-  }
+    "cuid2gen-linux-x64": "0.1.0",
+    "cuid2gen-linux-arm64": "0.1.0",
+    "cuid2gen-darwin-x64": "0.1.0",
+    "cuid2gen-darwin-arm64": "0.1.0",
+    "cuid2gen-windows-x64": "0.1.0",
+    "cuid2gen-windows-arm64": "0.1.0"
+  },
+  "packageManager": "pnpm@9.14.2"
 }
