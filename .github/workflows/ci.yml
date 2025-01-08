@@ -6,6 +6,39 @@ on:
       - "v*.*.*"
 
 jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@v3
+
+  # Add security scanning
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
   publish-npm-binaries:
     name: Publish NPM packages
     runs-on: ${{ matrix.build.os }}
@@ -128,6 +161,8 @@ jobs:
           fi
           # create the package directory
           mkdir -p "${node_pkg}/bin"
+          # copy README.md into the package
+          cp ../README.md "${node_pkg}/README.md"
           # generate package.json from the template
           envsubst < package.json.tmpl > "${node_pkg}/package.json"
           # copy the binary into the package
@@ -160,8 +195,8 @@ jobs:
         shell: bash
         run: |
           cd npm/cuid2gen
-          yarn install # requires optional dependencies to be present in the registry
-          yarn build
+          npm install # requires optional dependencies to be present in the registry
+          npm run build
           npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

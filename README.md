@@ -2,6 +2,7 @@
 
 A fast and secure command-line tool for generating [CUID2](https://github.com/paralleldrive/cuid2) identifiers - Collision-resistant Unique IDs.
 
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/raikusy/cuid2gen/ci.yml)
 [![Crates.io](https://img.shields.io/crates/v/cuid2gen.svg)](https://crates.io/crates/cuid2gen)
 [![Documentation](https://docs.rs/cuid2gen/badge.svg)](https://docs.rs/cuid2gen)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -22,10 +23,17 @@ A fast and secure command-line tool for generating [CUID2](https://github.com/pa
 cargo install cuid2gen
 ```
 
-### Using Homebrew‰
+### Using npx
 
 ```bash
-brew install cuid2gen
+npx cuid2gen
+```
+
+### Using npm
+
+```bash
+npm install -g cuid2gen
+cuid2gen
 ```
 
 ### Using Nix
@@ -68,22 +76,11 @@ USAGE:
 
 OPTIONS:
     -c, --count <COUNT>      Number of IDs to generate [default: 1]
-    -l, --length <LENGTH>    Length of each ID (not supported in current version)
     -f, --format <FORMAT>    Output format: line (default), csv, json
     -q, --quiet             Only output errors
     -h, --help             Print help
     -V, --version          Print version
 ```
-
-## Why CUID2?
-
-CUID2s are designed to be:
-
-- Secure: resistant to prediction and scanning attacks
-- Collision-resistant: extremely low probability of duplicates
-- Horizontally scalable: safe for distributed systems
-- URL-safe and ASCII-safe
-- Sorted by time of creation
 
 ## Contributing
 
