@@ -1,12 +1,12 @@
 {
   "name": "cuid2gen",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A command-line tool for generating CUID2 identifiers",
   "bin": "lib/index.js",
   "scripts": {
     "typecheck": "tsc --noEmit",
     "check": "npx @biomejs/biome check ./src --fix",
-    "build": "tsc --outDir lib",
+    "build": "npx tsx ./src/index.ts",
     "dev": "tsx src/index.ts",
     "start": "node lib/index.js",
     "clean": "rimraf lib",
