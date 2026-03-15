@@ -19,12 +19,18 @@ fn test_multiple_ids() {
 }
 
 #[test]
-fn test_length_warning() {
+fn test_custom_length() {
     let mut cmd = Command::cargo_bin("cuid2gen").unwrap();
     cmd.arg("--length").arg("10");
-    cmd.assert()
-        .success()
-        .stderr(predicate::str::contains("not supported"));
+    let output = cmd.assert().success().get_output().stdout.clone();
+    let id = String::from_utf8(output).unwrap();
+    let id = id.trim();
+    assert_eq!(id.len(), 10, "ID length should be 10, got: {}", id.len());
+    assert!(
+        id.chars()
+            .all(|c| c.is_ascii_digit() || (c.is_ascii_alphabetic() && c.is_lowercase())),
+        "ID should contain only lowercase alphanumeric characters"
+    );
 }
 
 #[test]
@@ -50,4 +56,27 @@ fn test_quiet_mode() {
     let mut cmd = Command::cargo_bin("cuid2gen").unwrap();
     cmd.arg("--quiet");
     cmd.assert().success().stdout(predicate::str::is_empty());
+}
+
+#[test]
+fn test_count_exceeds_max() {
+    let mut cmd = Command::cargo_bin("cuid2gen").unwrap();
+    cmd.arg("--count").arg("1000001");
+    cmd.assert().failure();
+}
+
+#[test]
+fn test_zero_count() {
+    let mut cmd = Command::cargo_bin("cuid2gen").unwrap();
+    cmd.arg("--count").arg("0");
+    cmd.assert().success().stdout(predicate::str::is_empty());
+}
+
+#[test]
+fn test_version_flag() {
+    let mut cmd = Command::cargo_bin("cuid2gen").unwrap();
+    cmd.arg("--version");
+    cmd.assert()
+        .success()
+        .stdout(predicate::str::contains("cuid2gen"));
 }

@@ -1,0 +1,12 @@
+/target
+result
+result-*
+.direnv
+**/node_modules
+**/lib
+**/dist
+**/build
+**/out
+**/tsconfig.tsbuildinfo
+**/.DS_Store
+**/.env 

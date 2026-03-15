@@ -19,6 +19,10 @@
     "url": "https://github.com/raikusy/cuid2gen/issues"
   },
   "homepage": "https://github.com/raikusy/cuid2gen#readme",
-  "os": ["darwin"],
-  "cpu": ["arm64"]
-} 
+  "os": [
+    "darwin"
+  ],
+  "cpu": [
+    "arm64"
+  ]
+}
