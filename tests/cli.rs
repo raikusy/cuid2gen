@@ -20,10 +20,14 @@ fn test_multiple_ids() {
 
 #[test]
 fn test_custom_length() {
-    let mut cmd = Command::cargo_bin("cuid2gen").unwrap();
-    cmd.arg("--length").arg("10");
-    let output = cmd.assert().success().get_output().stdout.clone();
-    let id = String::from_utf8(output).unwrap();
+    let output = Command::cargo_bin("cuid2gen")
+        .unwrap()
+        .arg("--length")
+        .arg("10")
+        .output()
+        .unwrap();
+    assert!(output.status.success());
+    let id = String::from_utf8(output.stdout).unwrap();
     let id = id.trim();
     assert_eq!(id.len(), 10, "ID length should be 10, got: {}", id.len());
     assert!(
@@ -56,6 +60,13 @@ fn test_quiet_mode() {
     let mut cmd = Command::cargo_bin("cuid2gen").unwrap();
     cmd.arg("--quiet");
     cmd.assert().success().stdout(predicate::str::is_empty());
+}
+
+#[test]
+fn test_length_too_short() {
+    let mut cmd = Command::cargo_bin("cuid2gen").unwrap();
+    cmd.arg("--length").arg("1");
+    cmd.assert().failure();
 }
 
 #[test]

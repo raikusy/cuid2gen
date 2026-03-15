@@ -18,7 +18,7 @@ struct Args {
     #[arg(short, long, default_value_t = 1)]
     count: u32,
 
-    /// Length of each ID
+    /// Length of each ID (minimum: 2, default: 24)
     #[arg(short, long)]
     length: Option<u16>,
 
@@ -89,6 +89,12 @@ fn main() -> Result<()> {
 
     if args.count > MAX_COUNT {
         return Err(anyhow!("Count exceeds maximum allowed value"));
+    }
+
+    if let Some(len) = args.length {
+        if len < 2 {
+            return Err(anyhow!("Length must be at least 2"));
+        }
     }
 
     let ids = generate_ids(args.count, args.length);

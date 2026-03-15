@@ -33,12 +33,12 @@
     "typescript": "^5.9.3"
   },
   "optionalDependencies": {
-    "cuid2gen-darwin-arm64": "*",
-    "cuid2gen-darwin-x64": "*",
-    "cuid2gen-linux-arm64": "*",
-    "cuid2gen-linux-x64": "*",
-    "cuid2gen-windows-arm64": "*",
-    "cuid2gen-windows-x64": "*"
+    "cuid2gen-darwin-arm64": "0.1.4",
+    "cuid2gen-darwin-x64": "0.1.4",
+    "cuid2gen-linux-arm64": "0.1.4",
+    "cuid2gen-linux-x64": "0.1.4",
+    "cuid2gen-windows-arm64": "0.1.4",
+    "cuid2gen-windows-x64": "0.1.4"
   },
   "engines": {
     "node": ">=22.0.0"
