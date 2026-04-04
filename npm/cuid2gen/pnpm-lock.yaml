@@ -20,25 +20,8 @@ importers:
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
-    optionalDependencies:
-      cuid2gen-darwin-arm64:
-        specifier: 0.1.4
-        version: 0.1.4
-      cuid2gen-darwin-x64:
-        specifier: 0.1.4
-        version: 0.1.4
-      cuid2gen-linux-arm64:
-        specifier: 0.1.4
-        version: 0.1.4
-      cuid2gen-linux-x64:
-        specifier: 0.1.4
-        version: 0.1.4
-      cuid2gen-windows-arm64:
-        specifier: 0.1.4
-        version: 0.1.4
-      cuid2gen-windows-x64:
-        specifier: 0.1.4
-        version: 0.1.4
+
+  ../cuid2gen-darwin-arm64: {}
 
 packages:
 
@@ -209,36 +192,6 @@ packages:
     resolution: {integrity: sha512-h+DEnpVvxmfVefa4jFbCf5HdH5YMDXRsmKflpf1pILZWRFlTbJpxeU55nJl4Smt5HQaGzg1o6RHFPJaOqnmBDg==}
     engines: {node: 18 || 20 || >=22}
 
-  cuid2gen-darwin-arm64@0.1.4:
-    resolution: {integrity: sha512-MvJtIA6Bt9DJUhCQdbxX1DpcF0TvEiEmEpdijK0P23cJH0UZC22PmWZUoIixd7WDXQhN3TUsGC9Zyzkr5ExGtA==}
-    cpu: [arm64]
-    os: [darwin]
-
-  cuid2gen-darwin-x64@0.1.4:
-    resolution: {integrity: sha512-XpEwqPzzmarqBotLc7nnL7cOoUyUAccu8FvY0q/7owyMC2hm6pf5+OL8TfRkbvPgOX6rHDmfYxTCcU76iaxBAA==}
-    cpu: [x64]
-    os: [darwin]
-
-  cuid2gen-linux-arm64@0.1.4:
-    resolution: {integrity: sha512-HkYewOW19yITtcbGvc4vsAT1YfFvBrlMyuzSQZl31TOoh6ZOc3VsvAwpwQ+Fzql8p8eTRjv+4MKiHxroyRXmGA==}
-    cpu: [arm64]
-    os: [linux]
-
-  cuid2gen-linux-x64@0.1.4:
-    resolution: {integrity: sha512-9TDU1Lz/i3SAMAn3PNDLaXTKTNKbNI3DKIdgW4oLZ0q1F9eDiMVFKheDjMbQRqjjiWuGUy+aSlm5Hzo65kXIyA==}
-    cpu: [x64]
-    os: [linux]
-
-  cuid2gen-windows-arm64@0.1.4:
-    resolution: {integrity: sha512-iE2uxhYAZG+IDUME8sOQaBPSxwIJlb3SriRICZuRIBq5Rha2yC6h9opwDwXvdfHvIgJ9c1GoXXVGEbb7o4ctWw==}
-    cpu: [arm64]
-    os: [win32]
-
-  cuid2gen-windows-x64@0.1.4:
-    resolution: {integrity: sha512-T4iiqHuWiahTI5zovGpZ304mjTcGS1kz+Wg3kPJDw2uUa8+/dtVxY9oCQlNmI6nAkDwnawBdNEv0K6GIgyTEtg==}
-    cpu: [x64]
-    os: [win32]
-
   esbuild@0.27.4:
     resolution: {integrity: sha512-Rq4vbHnYkK5fws5NF7MYTU68FPRE1ajX7heQ/8QXXWqNgqqJ/GkmmyxIzUnf2Sr/bakf8l54716CcMGHYhMrrQ==}
     engines: {node: '>=18'}
@@ -385,24 +338,6 @@ snapshots:
   brace-expansion@5.0.4:
     dependencies:
       balanced-match: 4.0.4
-
-  cuid2gen-darwin-arm64@0.1.4:
-    optional: true
-
-  cuid2gen-darwin-x64@0.1.4:
-    optional: true
-
-  cuid2gen-linux-arm64@0.1.4:
-    optional: true
-
-  cuid2gen-linux-x64@0.1.4:
-    optional: true
-
-  cuid2gen-windows-arm64@0.1.4:
-    optional: true
-
-  cuid2gen-windows-x64@0.1.4:
-    optional: true
 
   esbuild@0.27.4:
     optionalDependencies:

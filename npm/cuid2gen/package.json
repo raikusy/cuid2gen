@@ -6,7 +6,7 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "check": "npx @biomejs/biome check ./src --fix",
-    "build": "npx tsx ./src/index.ts",
+    "build": "tsc",
     "dev": "tsx src/index.ts",
     "start": "node lib/index.js",
     "clean": "rimraf lib",
@@ -33,12 +33,12 @@
     "typescript": "^5.9.3"
   },
   "optionalDependencies": {
-    "cuid2gen-darwin-arm64": "0.1.4",
-    "cuid2gen-darwin-x64": "0.1.4",
-    "cuid2gen-linux-arm64": "0.1.4",
-    "cuid2gen-linux-x64": "0.1.4",
-    "cuid2gen-windows-arm64": "0.1.4",
-    "cuid2gen-windows-x64": "0.1.4"
+    "cuid2gen-darwin-arm64": "0.1.5",
+    "cuid2gen-darwin-x64": "0.1.5",
+    "cuid2gen-linux-arm64": "0.1.5",
+    "cuid2gen-linux-x64": "0.1.5",
+    "cuid2gen-windows-arm64": "0.1.5",
+    "cuid2gen-windows-x64": "0.1.5"
   },
   "engines": {
     "node": ">=22.0.0"

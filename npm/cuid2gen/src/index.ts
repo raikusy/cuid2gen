@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 import { spawnSync } from "node:child_process";
+import { existsSync } from "node:fs";
+import { resolve } from "node:path";
 
 /**
  * Returns the executable path which is located inside `node_modules`
@@ -26,6 +28,18 @@ function getExePath() {
 			`${appName}-${os}-${arch}/bin/${appName}${extension}`,
 		);
 	} catch {
+		const workspaceBinaryPath = resolve(
+			__dirname,
+			"..",
+			"..",
+			`${appName}-${os}-${arch}`,
+			"bin",
+			`${appName}${extension}`,
+		);
+		if (existsSync(workspaceBinaryPath)) {
+			return workspaceBinaryPath;
+		}
+
 		throw new Error(
 			`Couldn't find application binary inside node_modules for ${os}-${arch}. ` +
 				`Supported platforms: linux-x64, linux-arm64, darwin-x64, darwin-arm64, windows-x64, windows-arm64`,
@@ -39,6 +53,21 @@ function getExePath() {
 function run() {
 	const args = process.argv.slice(2);
 	const processResult = spawnSync(getExePath(), args, { stdio: "inherit" });
+
+	if (processResult.error) {
+		console.error(
+			`Failed to execute cuid2gen binary: ${processResult.error.message}`,
+		);
+		process.exit(1);
+	}
+
+	if (processResult.signal) {
+		console.error(
+			`cuid2gen process terminated by signal ${processResult.signal}`,
+		);
+		process.exit(1);
+	}
+
 	process.exit(processResult.status ?? 1);
 }
 

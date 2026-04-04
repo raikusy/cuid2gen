@@ -1,10 +1,10 @@
 use anyhow::{anyhow, Context, Result};
 use clap::{Parser, ValueEnum};
-use serde::Serialize;
 use std::io::{self, Write};
 
 // Define a reasonable maximum count to prevent excessive memory usage
 const MAX_COUNT: u32 = 1_000_000;
+const MAX_LENGTH: u16 = 128;
 
 #[derive(Parser)]
 #[command(
@@ -18,7 +18,7 @@ struct Args {
     #[arg(short, long, default_value_t = 1)]
     count: u32,
 
-    /// Length of each ID (minimum: 2, default: 24)
+    /// Length of each ID (minimum: 2, maximum: 128, default: 24)
     #[arg(short, long)]
     length: Option<u16>,
 
@@ -38,44 +38,51 @@ enum OutputFormat {
     Json,
 }
 
-#[derive(Serialize)]
-struct Output {
-    ids: Vec<String>,
-}
-
-fn generate_ids(count: u32, length: Option<u16>) -> Vec<String> {
-    match length {
-        Some(len) => {
-            let constructor = cuid2::CuidConstructor::new().with_length(len);
-            (0..count).map(|_| constructor.create_id()).collect()
-        }
-        None => (0..count).map(|_| cuid2::create_id()).collect(),
+fn create_id(length: Option<u16>, constructor: Option<&cuid2::CuidConstructor>) -> String {
+    match (length, constructor) {
+        (Some(_), Some(constructor)) => constructor.create_id(),
+        _ => cuid2::create_id(),
     }
 }
 
-fn output_ids(ids: Vec<String>, format: &OutputFormat, quiet: bool) -> Result<()> {
+fn output_ids(count: u32, length: Option<u16>, format: &OutputFormat, quiet: bool) -> Result<()> {
     let stdout = io::stdout();
     let mut handle = stdout.lock();
+    let constructor = length.map(|len| cuid2::CuidConstructor::new().with_length(len));
 
     match format {
         OutputFormat::Line => {
-            for id in ids {
+            for _ in 0..count {
                 if !quiet {
+                    let id = create_id(length, constructor.as_ref());
                     writeln!(handle, "{}", id).context("Failed to write to stdout")?;
                 }
             }
         }
         OutputFormat::Csv => {
-            let output = ids.join(",");
             if !quiet {
-                writeln!(handle, "{}", output).context("Failed to write to stdout")?;
+                for index in 0..count {
+                    if index > 0 {
+                        write!(handle, ",").context("Failed to write CSV delimiter")?;
+                    }
+                    let id = create_id(length, constructor.as_ref());
+                    write!(handle, "{}", id).context("Failed to write to stdout")?;
+                }
+                writeln!(handle).context("Failed to write newline")?;
             }
         }
         OutputFormat::Json => {
-            let output = Output { ids };
             if !quiet {
-                serde_json::to_writer(&mut handle, &output)
-                    .context("Failed to serialize to JSON")?;
+                write!(handle, "{{\"ids\":[").context("Failed to write JSON prefix")?;
+                for index in 0..count {
+                    if index > 0 {
+                        write!(handle, ",").context("Failed to write JSON delimiter")?;
+                    }
+                    let id = create_id(length, constructor.as_ref());
+                    serde_json::to_writer(&mut handle, &id)
+                        .context("Failed to serialize ID to JSON")?;
+                }
+                write!(handle, "]}}").context("Failed to write JSON suffix")?;
                 writeln!(handle).context("Failed to write newline")?;
             }
         }
@@ -95,10 +102,15 @@ fn main() -> Result<()> {
         if len < 2 {
             return Err(anyhow!("Length must be at least 2"));
         }
+        if len > MAX_LENGTH {
+            return Err(anyhow!(
+                "Length exceeds maximum allowed value of {}",
+                MAX_LENGTH
+            ));
+        }
     }
 
-    let ids = generate_ids(args.count, args.length);
-    output_ids(ids, &args.format, args.quiet)?;
+    output_ids(args.count, args.length, &args.format, args.quiet)?;
 
     Ok(())
 }

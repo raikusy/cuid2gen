@@ -70,6 +70,13 @@ fn test_length_too_short() {
 }
 
 #[test]
+fn test_length_too_long() {
+    let mut cmd = Command::cargo_bin("cuid2gen").unwrap();
+    cmd.arg("--length").arg("129");
+    cmd.assert().failure();
+}
+
+#[test]
 fn test_count_exceeds_max() {
     let mut cmd = Command::cargo_bin("cuid2gen").unwrap();
     cmd.arg("--count").arg("1000001");
