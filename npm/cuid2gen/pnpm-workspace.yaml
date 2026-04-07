@@ -1,0 +1,5 @@
+packages:
+  - ../cuid2gen-*
+
+onlyBuiltDependencies:
+  - esbuild

@@ -1,6 +1,6 @@
 {
   "name": "cuid2gen-darwin-arm64",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Platform-specific binary for cuid2gen - A command-line tool for generating CUID2 identifiers",
   "repository": {
     "type": "git",
@@ -19,6 +19,10 @@
     "url": "https://github.com/raikusy/cuid2gen/issues"
   },
   "homepage": "https://github.com/raikusy/cuid2gen#readme",
-  "os": ["darwin"],
-  "cpu": ["arm64"]
-} 
+  "os": [
+    "darwin"
+  ],
+  "cpu": [
+    "arm64"
+  ]
+}

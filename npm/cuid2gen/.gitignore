@@ -3,11 +3,10 @@ result
 result-*
 .direnv
 **/node_modules
-.pnpm-store/
 **/lib
 **/dist
 **/build
 **/out
 **/tsconfig.tsbuildinfo
 **/.DS_Store
-**/.env
+**/.env 

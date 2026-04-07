@@ -1,122 +1,179 @@
 # cuid2gen
 
-A fast and secure command-line tool for generating [CUID2](https://github.com/paralleldrive/cuid2) identifiers - Collision-resistant Unique IDs.
+A fast command-line tool for generating [CUID2](https://github.com/paralleldrive/cuid2) identifiers.
 
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/raikusy/cuid2gen/ci.yml)
 [![Crates.io](https://img.shields.io/crates/v/cuid2gen.svg)](https://crates.io/crates/cuid2gen)
 [![Documentation](https://docs.rs/cuid2gen/badge.svg)](https://docs.rs/cuid2gen)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Features
+## Why Use It
 
-- Generate one or multiple CUID2 identifiers
-- Multiple output formats (newline-separated, comma-separated, JSON array)
-- Fast and memory efficient
-- Zero configuration required
-- Cross-platform support
+- Generate one or many collision-resistant IDs from a small CLI.
+- Control output shape with line, CSV, or JSON formats.
+- Tune generated ID length when you need shorter or longer identifiers.
+- Install with Cargo directly or through the npm wrapper package.
 
 ## Installation
 
-### Using Cargo
+### Cargo
 
 ```bash
 cargo install cuid2gen
 ```
 
-### Using npx
+### npx
 
 ```bash
 npx cuid2gen
 ```
 
-### Using npm
+### npm
 
 ```bash
 npm install -g cuid2gen
 cuid2gen
 ```
 
-### Using Nix
-
-```bash
-nix-env -i cuid2gen
-```
-
 ## Usage
 
-Generate a single CUID2:
+Generate one ID:
 
 ```bash
 cuid2gen
 ```
 
-Generate multiple CUIDs:
+Example output:
+
+```text
+tz4a98xxat96iws9zmbrgj3a
+```
+
+Generate multiple IDs:
 
 ```bash
-cuid2gen -c 5
+cuid2gen --count 3
 ```
 
-Generate as JSON array:
+Example output:
+
+```text
+f2q7k1h3hzeg5zfr71z2jnbv
+u5nscv4mg3zib6kju1omq0vl
+u4t8g9xvdw7w3np7am9r2h6u
+```
+
+Generate IDs with a custom length:
 
 ```bash
-cuid2gen -c 3 --format json
+cuid2gen --length 10
 ```
 
-Generate comma-separated values:
+Example output:
+
+```text
+e6r0k7n3xq
+```
+
+Generate CSV output:
 
 ```bash
-cuid2gen -c 3 --format csv
+cuid2gen --count 3 --format csv
 ```
 
-## Options
+Example output:
 
-```
-USAGE:
-    cuid2gen [OPTIONS]
-
-OPTIONS:
-    -c, --count <COUNT>      Number of IDs to generate [default: 1]
-    -f, --format <FORMAT>    Output format: line (default), csv, json
-    -q, --quiet             Only output errors
-    -h, --help             Print help
-    -V, --version          Print version
+```text
+fx0m9z5a8j2v5q8r8p1w4n7c,m1b4d7g1t4y0n8s7x5h2p6kj,x5v8m2p3j9z4r2f1c6b7n0qw
 ```
 
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-### Development Setup
+Generate JSON output:
 
 ```bash
-# Clone the repository
-git clone https://github.com/raikusy/cuid2gen.git
-cd cuid2gen
+cuid2gen --count 2 --format json
+```
 
-# Build
+Example output:
+
+```json
+{"ids":["d3f4m6r8s1z7x0c2v9n5k1jh","n0q8t2v4m7p6r1c9x3z5b2wd"]}
+```
+
+## CLI Reference
+
+```text
+Usage: cuid2gen [OPTIONS]
+
+Options:
+  -c, --count <COUNT>
+          Number of IDs to generate
+
+          [default: 1]
+
+  -l, --length <LENGTH>
+          Length of each ID (minimum: 2, default: 24)
+
+  -f, --format <FORMAT>
+          Output format: line (default), csv, json
+
+          [default: line]
+          [possible values: line, csv, json]
+
+  -q, --quiet
+          Only output errors
+
+  -h, --help
+          Print help (see a summary with '-h')
+
+  -V, --version
+          Print version
+```
+
+## Validation Rules
+
+- `--count` must not exceed `1000000`.
+- `--length` must be at least `2`.
+- `--format json` returns an object with an `ids` array, not a bare JSON array.
+- `--quiet` suppresses normal output and only leaves error output.
+
+## Development
+
+Prerequisites:
+
+- Rust `1.74+`
+- Node.js `22+` only if you are working on the npm wrapper in [`npm/cuid2gen`](npm/cuid2gen)
+
+Common commands:
+
+```bash
 cargo build
-
-# Run tests
 cargo test
-
-# Run formatter
-cargo fmt
-
-# Run linter
-cargo clippy
+cargo fmt --check
+cargo clippy -- -D warnings
 ```
 
-## License
+If you are changing the npm wrapper:
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+```bash
+cd npm/cuid2gen
+npm install
+npm run build
+```
+
+## Release and Distribution
+
+- The primary implementation is the Rust crate published as `cuid2gen`.
+- The npm package is a thin Node.js launcher that resolves a platform-specific binary package and executes it.
+- Node.js version requirements apply to the npm installation path, not to direct Rust or release-binary usage.
+
+## Project Docs
+
+- [Contributing](CONTRIBUTING.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
+- [Security Policy](SECURITY.md)
+- [License](LICENSE)
 
 ## Acknowledgments
 
-- [CUID2](https://github.com/paralleldrive/cuid2) - The original CUID2 specification
-- [cuid2-rs](https://github.com/mplanchard/cuid2-rs) - Rust implementation of CUID2
+- [CUID2](https://github.com/paralleldrive/cuid2) for the identifier specification.
+- [cuid2-rs](https://github.com/mplanchard/cuid2-rs) for the Rust implementation used by this CLI.
