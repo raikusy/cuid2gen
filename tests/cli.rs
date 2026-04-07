@@ -91,6 +91,13 @@ fn test_zero_count() {
 }
 
 #[test]
+fn test_zero_count_csv_format() {
+    let mut cmd = Command::cargo_bin("cuid2gen").unwrap();
+    cmd.arg("--count").arg("0").arg("--format").arg("csv");
+    cmd.assert().success().stdout(predicate::str::is_empty());
+}
+
+#[test]
 fn test_version_flag() {
     let mut cmd = Command::cargo_bin("cuid2gen").unwrap();
     cmd.arg("--version");

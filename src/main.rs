@@ -68,7 +68,9 @@ fn output_ids(count: u32, length: Option<u16>, format: &OutputFormat, quiet: boo
                     let id = create_id(length, constructor.as_ref());
                     write!(handle, "{}", id).context("Failed to write to stdout")?;
                 }
-                writeln!(handle).context("Failed to write newline")?;
+                if count > 0 {
+                    writeln!(handle).context("Failed to write newline")?;
+                }
             }
         }
         OutputFormat::Json => {
